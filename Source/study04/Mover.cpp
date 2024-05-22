@@ -28,9 +28,12 @@ void UMover::BeginPlay()
 void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+		
 	AActor* Owner = GetOwner();
-	UE_LOG(LogTemp, Warning, TEXT("%u"), Owner);
+	//FString Name = (*Owner).GetActorNameOrLabel();
+	FString Name = Owner->GetActorNameOrLabel();
+
+	UE_LOG(LogTemp, Warning, TEXT("Owner Name: %s"), *Name);
 	
 }
 
