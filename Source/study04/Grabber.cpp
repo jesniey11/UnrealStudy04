@@ -29,5 +29,9 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	FRotator MyRotation = GetOwner()->GetActorRotation();
+	FString DebugString = MyRotation.ToCompactString();
+
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *DebugString);
 }
 
