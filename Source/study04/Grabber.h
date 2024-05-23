@@ -24,5 +24,15 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+private:
+	UPROPERTY(EditAnywhere)
+	float MaxGrabDistance = 400;
+
+	UPROPERTY(EditAnywhere)
+	float GrabRadius = 100;
+	
+	/*
+	void PrintDamage(const float& Damage);
+	bool HasDamage(float& OutDamage);
+	*/
 };

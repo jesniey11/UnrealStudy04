@@ -2,6 +2,8 @@
 
 
 #include "Grabber.h"
+#include "Engine/World.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values for this component's properties
 UGrabber::UGrabber()
@@ -29,9 +31,59 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	FVector Start = GetComponentLocation();
+	FVector End = Start + GetForwardVector() * MaxGrabDistance;
+
+	DrawDebugLine(GetWorld(), Start, End, FColor::Green);
+	
+	FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
+
+	FHitResult HitResult;
+	bool HasHit = GetWorld()->SweepSingleByChannel(
+		HitResult, 
+		Start, End, 
+		FQuat::Identity, 
+		ECC_GameTraceChannel2,
+		Sphere
+		);
+
+	if (HasHit) 
+	{
+		AActor* HitActor = HitResult.GetActor();
+		FString ActorName = HitActor->GetActorNameOrLabel();
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *ActorName);
+	}
+	else { UE_LOG(LogTemp, Warning, TEXT("No Actor")); }
+
+	/*
+	float Damage;
+	if (HasDamage(Damage)) 
+	{
+		PrintDamage(Damage);
+	}
+	*/
+
+	/*
 	FRotator MyRotation = GetOwner()->GetActorRotation();
 	FString DebugString = MyRotation.ToCompactString();
 
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *DebugString);
+
+	float Time = GetWorld()->TimeSeconds;
+	UE_LOG(LogTemp, Display, TEXT("%f"), Time);
+	*/
 }
 
+/*
+void UGrabber::PrintDamage(const float& Damage) 
+{
+	//Damage = 2;
+	UE_LOG(LogTemp, Warning, TEXT("%f"), Damage);
+}
+
+bool UGrabber::HasDamage(float& OutDamage) 
+{
+	OutDamage = 5;
+	return true;
+}
+*/
