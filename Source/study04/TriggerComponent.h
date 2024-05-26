@@ -9,9 +9,20 @@
 /**
  * 
  */
-UCLASS()
+UCLASS( ClassGroup = (Custom), meta = (BlueprintSpawnableComponent) )
 class STUDY04_API UTriggerComponent : public UBoxComponent
 {
 	GENERATED_BODY()
-	
+
+public:
+	// Sets default values for this component's properties
+	UTriggerComponent();
+
+protected:
+	// Called when the game starts
+	virtual void BeginPlay() override;
+
+public:
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 };
