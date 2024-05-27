@@ -22,4 +22,27 @@ void UTriggerComponent::BeginPlay()
 void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	
+	AActor* DebugActor = GetAcceptableActor();
+	
+	if (DebugActor != nullptr) 
+	{
+		UE_LOG(LogTemp, Warning, TEXT("UNLOCK"));
+	}
+}
+
+AActor* UTriggerComponent::GetAcceptableActor() const 
+{
+	TArray<AActor*> Actors;
+	GetOverlappingActors(Actors);
+
+	for (AActor* Actor : Actors)
+	{
+		if (Actor->ActorHasTag(AcceptableActorTag))
+		{
+			return Actor;
+		}
+	}
+
+	return nullptr;
 }
