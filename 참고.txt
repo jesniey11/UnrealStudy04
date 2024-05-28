@@ -1,0 +1,16 @@
+남은 구현해야 할 기능
+
+LOCK1 해제 시 자물쇠 invisible 기능
+문 Rotator(Mover 응용)
+
+LOCK2 Trigger => 불 붙이기
+Fire 액터 추가, Trigger 작동 시 비밀 문 내려감(다시 올라오지 않음)
+
+숏컷 ON 레버 구현(Mover와 연계됨)
+
+LOCK3 받침대 Trigger => 올리면 Rotator를 통한 지하 문 작동
+
+지하실 => 강의 참조
+
+START 지점에 GOAL 배치 시 Rotator를 통한 입구 작동 => CLEAR
+
