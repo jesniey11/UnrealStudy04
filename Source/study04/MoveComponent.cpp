@@ -52,13 +52,3 @@ void UMoveComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 //		NewShouldMove = ShouldMove;
 //	}
 //}
-
-//void UMoveComponent::Rotate(float NewDeltaRotateTime)
-//{
-//
-//}
-//
-//void UMoveComponent::SetShouldRotate(bool NewShouldRotate)
-//{
-//	ShouldRotate = NewShouldRotate;
-//}

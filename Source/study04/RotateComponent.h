@@ -37,6 +37,6 @@ private:
 	UPROPERTY(EditAnywhere)
 	bool ShouldRotate = false;
  
-	 FVector OriginalRotation;
+	FRotator OriginalRotation;
 
 };

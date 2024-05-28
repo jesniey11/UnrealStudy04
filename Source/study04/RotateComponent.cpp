@@ -2,6 +2,7 @@
 
 
 #include "RotateComponent.h"
+#include "Math/UnrealMathUtility.h"
 
 // Sets default values for this component's properties
 URotateComponent::URotateComponent()
@@ -19,7 +20,8 @@ void URotateComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	OriginalRotation = GetOwner()->GetActorRotation();
+	UE_LOG(LogTemp, Warning, TEXT("Test: %s"), *OriginalRotation.ToString());
 	
 }
 
@@ -32,14 +34,28 @@ void URotateComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	if (ShouldRotate)
 	{
 		FRotator CurrentRotation = GetOwner()->GetActorRotation();
-		FRo
+		FRotator TargetRotation = OriginalRotation + RotateOffset;
 
-		/*FVector CurrentLocation = GetOwner()->GetActorLocation();
-		FVector TargetLocation = OriginalLocation + MoveOffset;
-		float MoveSpeed = FVector::Distance(OriginalLocation, TargetLocation) / MoveTime;
+		//UE_LOG(LogTemp, Display, TEXT("Offset: %s"), *RotateOffset.ToString());
+		//UE_LOG(LogTemp, Display, TEXT("Current: %s"), *CurrentRotation.ToString());
 
-		FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, NewDeltaMoveTime, MoveSpeed);
-		GetOwner()->SetActorLocation(NewLocation);*/
+		float RotateSpeed = OriginalRotation.GetManhattanDistance(TargetRotation) / RotateTime;
+
+		FRotator NewRotation = FMath::RInterpConstantTo(CurrentRotation, TargetRotation, DeltaTime, RotateSpeed);
+		GetOwner()->SetActorRotation(NewRotation);
 	}
 }
 
+//void URotateComponent::SetShouldRotate(bool NewShouldRotate) 
+//{
+//	if (NewShouldRotate != NULL) 
+//	{
+//		ShouldRotate = NewShouldRotate;
+//	}
+//
+//	else 
+//	{
+//		//UE_LOG(LogTemp, Error, TEXT("null NewShouldRotate"));
+//		NewShouldRotate = ShouldRotate;
+//	}
+//}
