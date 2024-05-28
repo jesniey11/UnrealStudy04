@@ -27,17 +27,21 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	
 	if (Actor != nullptr) 
 	{
-		UPrimitiveComponent* Component = Cast<UPrimitiveComponent>(Actor->GetRootComponent());
+		FString name = Actor->GetActorNameOrLabel();
+		UE_LOG(LogTemp, Display, TEXT("%s"), *name);
+		/*UPrimitiveComponent* Component = Cast<UPrimitiveComponent>(Actor->GetRootComponent());
 		if (Component != nullptr) 
 		{
 			Component->SetSimulatePhysics(false);
-		}
-		Actor->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
-		Mover->SetShouldMove(true);
+		}*/
+		//Actor->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
+		//Mover->SetShouldMove(true);
+		//UE_LOG(LogTemp, Display, TEXT("SetShouldMove(true)"));
 	}
 	else 
 	{
-		Mover->SetShouldMove(false);
+		//Mover->SetShouldMove(false); 
+		//UE_LOG(LogTemp, Display, TEXT("SetShouldMove(false)"));
 	}
 }
 

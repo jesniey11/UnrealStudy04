@@ -139,17 +139,3 @@ bool UGrabber::GetGrabbableInReach(FHitResult& OutHitResult) const
 		Sphere
 	);	
 }
-
-/*
-void UGrabber::PrintDamage(const float& Damage) 
-{
-	//Damage = 2;
-	UE_LOG(LogTemp, Warning, TEXT("%f"), Damage);
-}
-
-bool UGrabber::HasDamage(float& OutDamage) 
-{
-	OutDamage = 5;
-	return true;
-}
-*/

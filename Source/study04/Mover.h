@@ -24,16 +24,38 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	void Move(float DeltaMoveTime);
 	void SetShouldMove(bool ShouldMove);
 
+	//void Rotate(float DeltaRotateTime);
+	//void SetShouldRotate(bool ShouldRotate);
+
 private:
+	/* Move Variables */
 	UPROPERTY(EditAnywhere)
 	FVector MoveOffset;
-	FVector OriginalLocation;
 
 	UPROPERTY(EditAnywhere)
 	float MoveTime = 4;
 
 	UPROPERTY(EditAnywhere)
 	bool ShouldMove = false;
+
+	FVector OriginalLocation;
+	////////////////////////////////////////
+
+	///* Rotate Variables */
+	//UPROPERTY(EditAnywhere)
+	//FRotator RotateOffset;
+
+	//UPROPERTY(EditAnywhere)
+	//float RotateTime = 4;
+
+	//UPROPERTY(EditAnywhere)
+	//bool ShouldRotate = false;
+	// 
+	// FVector OriginalRotation;
+	////////////////////////////////////////
+
+	/* Global Variables */
 };
