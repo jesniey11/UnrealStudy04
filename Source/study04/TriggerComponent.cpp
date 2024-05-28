@@ -35,19 +35,19 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 			Component->SetSimulatePhysics(false);
 		}*/
 		//Actor->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
-		//Mover->SetShouldMove(true);
+		//MoveComponent->SetShouldMove(true);
 		//UE_LOG(LogTemp, Display, TEXT("SetShouldMove(true)"));
 	}
 	else 
 	{
-		//Mover->SetShouldMove(false); 
+		//MoveComponent->SetShouldMove(false); 
 		//UE_LOG(LogTemp, Display, TEXT("SetShouldMove(false)"));
 	}
 }
 
-void UTriggerComponent::SetMover(UMover* NewMover) 
+void UTriggerComponent::SetMoveComponent(UMoveComponent* NewMoveComponent) 
 {
-	Mover = NewMover;
+	MoveComponent = NewMoveComponent;
 
 }
 

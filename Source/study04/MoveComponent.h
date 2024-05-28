@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "Mover.generated.h"
+#include "MoveComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class STUDY04_API UMover : public UActorComponent
+class STUDY04_API UMoveComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UMover();
+	UMoveComponent();
 
 protected:
 	// Called when the game starts
@@ -24,11 +24,7 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void Move(float DeltaMoveTime);
 	void SetShouldMove(bool ShouldMove);
-
-	//void Rotate(float DeltaRotateTime);
-	//void SetShouldRotate(bool ShouldRotate);
 
 private:
 	/* Move Variables */
@@ -42,20 +38,6 @@ private:
 	bool ShouldMove = false;
 
 	FVector OriginalLocation;
-	////////////////////////////////////////
-
-	///* Rotate Variables */
-	//UPROPERTY(EditAnywhere)
-	//FRotator RotateOffset;
-
-	//UPROPERTY(EditAnywhere)
-	//float RotateTime = 4;
-
-	//UPROPERTY(EditAnywhere)
-	//bool ShouldRotate = false;
-	// 
-	// FVector OriginalRotation;
-	////////////////////////////////////////
 
 	/* Global Variables */
 };

@@ -1,11 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Mover.h"
+#include "MoveComponent.h"
 #include "Math/UnrealMathUtility.h"
 
 // Sets default values for this component's properties
-UMover::UMover()
+UMoveComponent::UMoveComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -15,7 +15,7 @@ UMover::UMover()
 }
 
 // Called when the game starts
-void UMover::BeginPlay()
+void UMoveComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	
@@ -24,27 +24,22 @@ void UMover::BeginPlay()
 }
 
 // Called every frame
-void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UMoveComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
-	Move(DeltaTime);
-}
-
-void UMover::Move(float NewDeltaMoveTime)
-{
 	if (ShouldMove)
 	{
 		FVector CurrentLocation = GetOwner()->GetActorLocation();
-		FVector TargetLocation = OriginalLocation+ MoveOffset;
+		FVector TargetLocation = OriginalLocation + MoveOffset;
 		float MoveSpeed = FVector::Distance(OriginalLocation, TargetLocation) / MoveTime;
 
-		FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, NewDeltaMoveTime, MoveSpeed);
+		FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, DeltaTime, MoveSpeed);
 		GetOwner()->SetActorLocation(NewLocation);
 	}
 }
 
-//void UMover::SetShouldMove(bool NewShouldMove) 
+//void UMoveComponent::SetShouldMove(bool NewShouldMove) 
 //{
 //	if (NewShouldMove != NULL) 
 //	{
@@ -58,12 +53,12 @@ void UMover::Move(float NewDeltaMoveTime)
 //	}
 //}
 
-//void UMover::Rotate(float NewDeltaRotateTime)
+//void UMoveComponent::Rotate(float NewDeltaRotateTime)
 //{
 //
 //}
 //
-//void UMover::SetShouldRotate(bool NewShouldRotate)
+//void UMoveComponent::SetShouldRotate(bool NewShouldRotate)
 //{
 //	ShouldRotate = NewShouldRotate;
 //}
