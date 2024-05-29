@@ -36,9 +36,6 @@ void URotateComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		FRotator CurrentRotation = GetOwner()->GetActorRotation();
 		FRotator TargetRotation = OriginalRotation + RotateOffset;
 
-		//UE_LOG(LogTemp, Display, TEXT("Offset: %s"), *RotateOffset.ToString());
-		//UE_LOG(LogTemp, Display, TEXT("Current: %s"), *CurrentRotation.ToString());
-
 		float RotateSpeed = OriginalRotation.GetManhattanDistance(TargetRotation) / RotateTime;
 
 		FRotator NewRotation = FMath::RInterpConstantTo(CurrentRotation, TargetRotation, DeltaTime, RotateSpeed);

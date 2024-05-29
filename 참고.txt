@@ -3,9 +3,11 @@
 1 
 LOCK1 해제 시 자물쇠 invisible 기능
 => AActor Destroy: Key에 적용, Lock의 피직스 시뮬레이터 활성화
+TriggerComponent에 bool IsUnlock = false => true
 
-2
+2 [완료] ///////////////////////////////////////
 1이 완료되면 문 Rotator 적용(Mover 응용)
+문 양쪽으로 열림
 
 3
 LOCK2 Trigger => 불 붙이기

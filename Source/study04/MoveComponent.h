@@ -38,6 +38,4 @@ private:
 	bool ShouldMove = false;
 
 	FVector OriginalLocation;
-
-	/* Global Variables */
 };

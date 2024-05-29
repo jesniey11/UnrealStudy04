@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
 #include "MoveComponent.h"
+#include "RotateComponent.h"
 #include "TriggerComponent.generated.h"
 
 /**
