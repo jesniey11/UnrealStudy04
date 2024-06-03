@@ -1,27 +1,25 @@
-남은 구현해야 할 기능
 
-1 
-LOCK1 해제 시 자물쇠 invisible 기능
-=> AActor Destroy: Key에 적용, Lock의 피직스 시뮬레이터 활성화
-TriggerComponent에 bool IsUnlock = false => true
+0. 
+이미 LOCK과 태그가 일치하는 KEY가 Overlap 되면 uelog를 띄우게까지는 함
+개별적으로 문짝 움직이는 기능도 됨
 
-2 [완료] ///////////////////////////////////////
-1이 완료되면 문 Rotator 적용(Mover 응용)
-문 양쪽으로 열림
 
-3
-LOCK2 Trigger => 불 붙이기
-Fire 액터 추가, Trigger 작동 시 비밀 문 내려감(다시 올라오지 않음)
+1. Trigger Move Rotate
+2. DOOR 액터에 Move나 Rotate가 들어가있음
 
-4
-숏컷 ON 레버 구현(Mover와 연계됨)
+3. Trigger가 bool IsUnlock = true 가 되면 이벤트 발생
+4. 이벤트가 발생하면 DOOR 액터의 Move/Rotate가 IsUnlock을 받아옴
 
-5
-LOCK3 받침대 Trigger => 올리면 Rotator를 통한 지하 문 작동
+5. IsUnlock t 이면 Move/Rotate가 작동하게 코드가 짜져있음
 
-6
-지하실 => 강의 참조
 
-7
-START 지점에 GOAL 배치 시 Rotator를 통한 입구 작동 => CLEAR
+//////////////////////////
 
+문제 1 -> 자물쇠 열리면 문에 정보 줘야함
+문제 2 -> 자물쇠에 트리거냐 자물쇠에 비피트리거냐
+
+///////////////////////////
+
+LOCK 각자 BP
+각자 C++ 클래스
+부모를 하나 파서 스트링

@@ -11,7 +11,10 @@
 /**
  * 
  */
-UCLASS( ClassGroup = (Custom), meta = (BlueprintSpawnableComponent) )
+UDELEGATE(BlueprintAuthorityOnly)
+DECLARE_DELEGATE(FStringDelegate);
+
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class STUDY04_API UTriggerComponent : public UBoxComponent
 {
 	GENERATED_BODY()
@@ -27,15 +30,23 @@ protected:
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	
+
 	UFUNCTION(BlueprintCallable)
 	void SetMoveComponent(UMoveComponent* MoveComponent);
 
+	FStringDelegate DoorLock;
+
 private:
+	/* Variables */
 	UPROPERTY(EditAnywhere)
 	FName AcceptableActorTag;
+	bool IsUnlock = false;
+
 	UMoveComponent* MoveComponent;
 
+	/* Function */
 	AActor* GetAcceptableActor() const;
 
+	UFUNCTION()
+	bool GetIsUnlock() const;
 };

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "TriggerComponent.h"
 #include "RotateComponent.generated.h"
 
 
@@ -39,4 +40,5 @@ private:
  
 	FRotator OriginalRotation;
 
+	FStringDelegate DoorLock;
 };
