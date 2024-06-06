@@ -4,15 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
-#include "MoveComponent.h"
-#include "RotateComponent.h"
+#include "UnlockComponent.h"
 #include "TriggerComponent.generated.h"
 
 /**
  * 
  */
-UDELEGATE(BlueprintAuthorityOnly)
-DECLARE_DELEGATE(FStringDelegate);
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class STUDY04_API UTriggerComponent : public UBoxComponent
@@ -31,22 +28,18 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UFUNCTION(BlueprintCallable)
-	void SetMoveComponent(UMoveComponent* MoveComponent);
-
-	FStringDelegate DoorLock;
-
 private:
 	/* Variables */
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere)	
 	FName AcceptableActorTag;
-	bool IsUnlock = false;
 
-	UMoveComponent* MoveComponent;
+	// Detail 패널에서 문 연결
+	UPROPERTY(EditAnywhere)
+	AActor* Door;
+	UUnlockComponent* UnlockComponent;
 
 	/* Function */
-	AActor* GetAcceptableActor() const;
-
-	UFUNCTION()
-	bool GetIsUnlock() const;
+	AActor* GetAcceptableKey() const;
+	UUnlockComponent* GetUnlockComponent(AActor* DoorActor) const;
+	void ControlDoor(AActor* Key);
 };

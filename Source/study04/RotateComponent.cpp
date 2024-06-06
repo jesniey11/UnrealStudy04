@@ -2,6 +2,7 @@
 
 
 #include "RotateComponent.h"
+#include "UnlockComponent.h"
 #include "Math/UnrealMathUtility.h"
 
 // Sets default values for this component's properties
@@ -20,7 +21,9 @@ void URotateComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	AActor* Parent = GetOwner()->GetParentActor();
 	OriginalRotation = GetOwner()->GetActorRotation();
+
 	UE_LOG(LogTemp, Warning, TEXT("Test: %s"), *OriginalRotation.ToString());
 	
 }
@@ -30,6 +33,7 @@ void URotateComponent::BeginPlay()
 void URotateComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
 
 	if (ShouldRotate)
 	{

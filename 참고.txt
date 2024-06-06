@@ -23,3 +23,28 @@
 LOCK 각자 BP
 각자 C++ 클래스
 부모를 하나 파서 스트링
+
+
+
+/////////////////////////
+
+1. Lock -> Door -> ChildDoor
+Lock(Trigger) -> Door(Unlock) -> ChildDoor(Move/Rotate)
+
+2. Door-Lock 연결
+Trigger/Move/Rotate는 include로 Unlock를 받는다
+Unlock에 IsUnlock/GetIsUnlock/SetIsUnlock 있음
+
+아닌가 중개하는 하나가 다 받아야 하나?
+어차피 문은 GetIsUnlock 만 하면 되고 자물쇠는 SetIsUnlock 만 하면 되니까? 
+다시 잠기는거 구현 하지말고? 그래그래...
+
+3. Lock 잠금 해제 -> SetIsUnlock
+4. 문 열어야 하니까 ChildDoor도 GetIsUnlock 받아오기
+
+
+		개별 연출
+		// AActor* Actor(KEY)를 Destroy
+		// Owner의 Physics Simulate 활성화(SetSimulatePhysics(true))
+		// => 블루프린트에서 처리
+		// 이러면 Lock이 overlap 하는 모든 액터가 Destory 되니까(특히 플레이어...) 방법을 생각해야함

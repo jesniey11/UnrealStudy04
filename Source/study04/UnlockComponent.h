@@ -4,16 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "RotateComponent.generated.h"
+#include "UnlockComponent.generated.h"
+
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class STUDY04_API URotateComponent : public UActorComponent
+class STUDY04_API UUnlockComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	URotateComponent();
+	UUnlockComponent();
 
 protected:
 	// Called when the game starts
@@ -23,22 +24,17 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	//void SetShouldRotate(bool ShouldRotate);
+	/* Variables */
+	// 한번 열린 문이 다시 닫힐 수 있으면 true
+	UPROPERTY(EditAnywhere)
+	bool IsToggleable = false;
+
+	/* Function */
+	bool GetIsUnlock() const;
+	void SetIsUnlock(bool IsUnlock);
 
 private:
 	/* Variables */
-	UPROPERTY(EditAnywhere)
-	FRotator RotateOffset;
-
-	UPROPERTY(EditAnywhere)
-	float RotateTime = 4;
-
-	// 아마... 없어도 될 것 같다
-	UPROPERTY(EditAnywhere)
-	bool ShouldRotate = false;
-
-	FRotator OriginalRotation;
-
-	/* Function */
-
+	UPROPERTY(VisibleAnywhere)
+	bool IsUnlock = false;
 };
