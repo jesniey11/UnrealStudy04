@@ -28,9 +28,15 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	UFUNCTION(BlueprintCallable)
+	AActor* GetAcceptableKey() const;
+
+	UFUNCTION(BlueprintCallable)
+	void ControlDoor(AActor* Key);
+
 private:
 	/* Variables */
-	UPROPERTY(EditAnywhere)	
+	UPROPERTY(EditAnywhere)
 	FName AcceptableActorTag;
 
 	// Detail 패널에서 문 연결
@@ -40,7 +46,6 @@ private:
 	UUnlockComponent* UnlockComponent;
 
 	/* Function */
-	AActor* GetAcceptableKey() const;
 	UUnlockComponent* GetUnlockComponent(AActor* DoorActor) const;
-	void ControlDoor(AActor* Key);
+	//void ControlDoor(AActor* Key);
 };
