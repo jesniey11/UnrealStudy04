@@ -2,7 +2,6 @@
 
 
 #include "RotateComponent.h"
-#include "UnlockComponent.h"
 #include "Math/UnrealMathUtility.h"
 
 // Sets default values for this component's properties
@@ -24,8 +23,7 @@ void URotateComponent::BeginPlay()
 	AActor* Parent = GetOwner()->GetParentActor();
 	OriginalRotation = GetOwner()->GetActorRotation();
 
-	UE_LOG(LogTemp, Warning, TEXT("Test: %s"), *OriginalRotation.ToString());
-	
+	UnlockComponent = GetUnlockComponent(Parent);
 }
 
 
@@ -35,7 +33,7 @@ void URotateComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 
-	if (ShouldRotate)
+	if (UnlockComponent->GetIsUnlock())
 	{
 		FRotator CurrentRotation = GetOwner()->GetActorRotation();
 		FRotator TargetRotation = OriginalRotation + RotateOffset;
@@ -45,6 +43,18 @@ void URotateComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		FRotator NewRotation = FMath::RInterpConstantTo(CurrentRotation, TargetRotation, DeltaTime, RotateSpeed);
 		GetOwner()->SetActorRotation(NewRotation);
 	}
+}
+
+UUnlockComponent* URotateComponent::GetUnlockComponent(AActor* ParentActor) const
+{
+	if (UnlockComponent) { return UnlockComponent; }
+
+	if (ParentActor)
+	{
+		return ParentActor->FindComponentByClass<UUnlockComponent>();
+	}
+
+	return nullptr;
 }
 
 //void URotateComponent::SetShouldRotate(bool NewShouldRotate) 

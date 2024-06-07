@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "UnlockComponent.h"
 #include "RotateComponent.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -33,12 +34,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	float RotateTime = 4;
 
-	// 아마... 없어도 될 것 같다
-	UPROPERTY(EditAnywhere)
-	bool ShouldRotate = false;
-
 	FRotator OriginalRotation;
+	UUnlockComponent* UnlockComponent;
 
 	/* Function */
+	UUnlockComponent* GetUnlockComponent(AActor* ParentActor) const;
 
 };

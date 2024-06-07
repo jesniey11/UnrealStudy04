@@ -36,6 +36,7 @@ private:
 	// Detail 패널에서 문 연결
 	UPROPERTY(EditAnywhere)
 	AActor* Door;
+
 	UUnlockComponent* UnlockComponent;
 
 	/* Function */
