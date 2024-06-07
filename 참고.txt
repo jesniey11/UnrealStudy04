@@ -1,31 +1,3 @@
-
-0. 
-이미 LOCK과 태그가 일치하는 KEY가 Overlap 되면 uelog를 띄우게까지는 함
-개별적으로 문짝 움직이는 기능도 됨
-
-
-1. Trigger Move Rotate
-2. DOOR 액터에 Move나 Rotate가 들어가있음
-
-3. Trigger가 bool IsUnlock = true 가 되면 이벤트 발생
-4. 이벤트가 발생하면 DOOR 액터의 Move/Rotate가 IsUnlock을 받아옴
-
-5. IsUnlock t 이면 Move/Rotate가 작동하게 코드가 짜져있음
-
-
-//////////////////////////
-
-문제 1 -> 자물쇠 열리면 문에 정보 줘야함
-문제 2 -> 자물쇠에 트리거냐 자물쇠에 비피트리거냐
-
-///////////////////////////
-
-LOCK 각자 BP
-각자 C++ 클래스
-부모를 하나 파서 스트링
-
-
-
 /////////////////////////
 
 1. Lock -> Door -> ChildDoor
@@ -42,9 +14,19 @@ Unlock에 IsUnlock/GetIsUnlock/SetIsUnlock 있음
 3. Lock 잠금 해제 -> SetIsUnlock
 4. 문 열어야 하니까 ChildDoor도 GetIsUnlock 받아오기
 
+/////////////////////////
 
-		개별 연출
-		// AActor* Actor(KEY)를 Destroy
-		// Owner의 Physics Simulate 활성화(SetSimulatePhysics(true))
-		// => 블루프린트에서 처리
-		// 이러면 Lock이 overlap 하는 모든 액터가 Destory 되니까(특히 플레이어...) 방법을 생각해야함
+BP 연출
+
+CandleStick (KEY)
+bool IsFire = false(기본)
+KEY2, Candle, IsNotFire 태그
+
+BP_Torch_Dungeon
+Candle 태그가 있는 객체와 overlap 하면 
+CandleStick IsFire = true
+IsNotFire 태그를 삭제시킴
+
+Pit (LOCK)
+조건
+AcceptKey : KEY2
