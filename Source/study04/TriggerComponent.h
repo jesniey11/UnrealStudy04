@@ -30,8 +30,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	AActor* GetAcceptableKey() const;
-
-	UFUNCTION(BlueprintCallable)
 	void ControlDoor(AActor* Key);
 
 private:

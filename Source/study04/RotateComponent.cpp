@@ -56,17 +56,3 @@ UUnlockComponent* URotateComponent::GetUnlockComponent(AActor* ParentActor) cons
 
 	return nullptr;
 }
-
-//void URotateComponent::SetShouldRotate(bool NewShouldRotate) 
-//{
-//	if (NewShouldRotate != NULL) 
-//	{
-//		ShouldRotate = NewShouldRotate;
-//	}
-//
-//	else 
-//	{
-//		//UE_LOG(LogTemp, Error, TEXT("null NewShouldRotate"));
-//		NewShouldRotate = ShouldRotate;
-//	}
-//}

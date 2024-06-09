@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "UnlockComponent.h"
 #include "MoveComponent.generated.h"
 
 
@@ -24,18 +25,17 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void SetShouldMove(bool ShouldMove);
-
 private:
-	/* Move Variables */
+	/* Variables */
 	UPROPERTY(EditAnywhere)
 	FVector MoveOffset;
 
 	UPROPERTY(EditAnywhere)
 	float MoveTime = 4;
 
-	UPROPERTY(EditAnywhere)
-	bool ShouldMove = false;
-
 	FVector OriginalLocation;
+	UUnlockComponent* UnlockComponent;
+
+	/* Function */
+	UUnlockComponent* GetUnlockComponent() const;
 };

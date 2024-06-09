@@ -20,18 +20,19 @@ void UMoveComponent::BeginPlay()
 	Super::BeginPlay();
 	
 	OriginalLocation = GetOwner()->GetActorLocation();
-	
+	UnlockComponent = GetUnlockComponent();
 }
 
 // Called every frame
 void UMoveComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	
-	if (ShouldMove)
+
+	if (UnlockComponent->GetIsUnlock())
 	{
 		FVector CurrentLocation = GetOwner()->GetActorLocation();
 		FVector TargetLocation = OriginalLocation + MoveOffset;
+
 		float MoveSpeed = FVector::Distance(OriginalLocation, TargetLocation) / MoveTime;
 
 		FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, DeltaTime, MoveSpeed);
@@ -39,16 +40,12 @@ void UMoveComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	}
 }
 
-//void UMoveComponent::SetShouldMove(bool NewShouldMove) 
-//{
-//	if (NewShouldMove != NULL) 
-//	{
-//		ShouldMove = NewShouldMove;
-//	}
-//
-//	else 
-//	{
-//		//UE_LOG(LogTemp, Error, TEXT("null NewShouldMove"));
-//		NewShouldMove = ShouldMove;
-//	}
-//}
+UUnlockComponent* UMoveComponent::GetUnlockComponent() const
+{
+	if (!UnlockComponent)
+	{
+		return GetOwner()->FindComponentByClass<UUnlockComponent>();
+	}
+
+	return UnlockComponent;
+}
