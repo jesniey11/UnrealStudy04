@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "UnlockComponent.generated.h"
+#include "ButtonComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class STUDY04_API UUnlockComponent : public UActorComponent
+class STUDY04_API UButtonComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UUnlockComponent();
+	UButtonComponent();
 
 protected:
 	// Called when the game starts
@@ -24,20 +24,5 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	/* Variables */
-	// 한번 열린 문이 다시 닫힐 수 있으면 true
-	UPROPERTY(EditAnywhere)
-	bool IsToggleable = false;
-
-	/* Function */
-	bool GetIsUnlock() const;
-
-	UFUNCTION(BlueprintCallable)
-	void SetIsUnlock(bool IsUnlock);
-
-private:
-	/* Variables */
-	UPROPERTY(EditAnywhere)
-	//UPROPERTY(VisibleAnywhere)
-	bool IsUnlock = false;
+		
 };
