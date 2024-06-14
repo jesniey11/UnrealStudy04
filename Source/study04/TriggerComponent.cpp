@@ -14,7 +14,6 @@ UTriggerComponent::UTriggerComponent()
 void UTriggerComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
 	UnlockComponent = GetUnlockComponent(Door);
 }
 
@@ -41,56 +40,41 @@ AActor* UTriggerComponent::GetAcceptableKey() const
 			return Actor;
 		}
 	}
-
 	return nullptr;
 }
 
 UUnlockComponent* UTriggerComponent::GetUnlockComponent(AActor* DoorActor) const
-{
-	if (UnlockComponent) { return UnlockComponent; }
-	
-	if (DoorActor) 
+{	
+	if (UnlockComponent)
+	{
+		return UnlockComponent;
+	}
+
+	if (DoorActor)
 	{
 		return DoorActor->FindComponentByClass<UUnlockComponent>();
 	}
-	
-	return nullptr;
+
+	return UnlockComponent;
 }
 
 void UTriggerComponent::ControlDoor(AActor* Key)
 {
 	if (Key)
 	{
-		FString debug;
-
-		debug = Key->GetActorNameOrLabel();
-		UE_LOG(LogTemp, Display, TEXT("KEY: %s"), *debug);
-
-		debug = GetOwner()->GetActorNameOrLabel();
-		UE_LOG(LogTemp, Display, TEXT("LOCK: %s"), *debug);
-
-		if (UnlockComponent)
-		{
-			UnlockComponent->SetIsUnlock(true);
-		}
-
-		// UNUSED : Key 액터를 Lock에 부착
-		/*
-		UPrimitiveComponent* Component = Cast<UPrimitiveComponent>(Actor->GetRootComponent());
-		if (Component != nullptr)
-		{
-			Component->SetSimulatePhysics(false);
-		}
-		Actor->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
-		*/
+		SetLockState(true);
 	}
-	else
+}
+
+void UTriggerComponent::GetInteraction()
+{
+	SetLockState(true);
+}
+
+void UTriggerComponent::SetLockState(bool State)
+{
+	if (UnlockComponent)
 	{
-		/*
-		if (UnlockComponent && DoorComponent->IsToggleable)
-		{
-			UnlockComponent->SetIsUnlock(false);
-		}
-		*/
+		UnlockComponent->SetIsUnlock(State);
 	}
 }

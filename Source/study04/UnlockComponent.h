@@ -37,7 +37,7 @@ public:
 
 private:
 	/* Variables */
-	UPROPERTY(EditAnywhere)
-	//UPROPERTY(VisibleAnywhere)
+	//UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	bool IsUnlock = false;
 };
