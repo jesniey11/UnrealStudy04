@@ -48,7 +48,8 @@ private:
 	APlayerController* PlayerController;
 
 	/* Function */
-	UUnlockComponent* GetUnlockComponent(AActor* DoorActor) const;
-	void ControlDoor(AActor* Key);
+	void GetUnlockComponent();
+	//UUnlockComponent* GetUnlockComponent(AActor* DoorActor) const;
+	void ControlDoor();
 	void SetLockState(bool State);
 };

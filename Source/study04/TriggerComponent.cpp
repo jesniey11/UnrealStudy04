@@ -14,15 +14,14 @@ UTriggerComponent::UTriggerComponent()
 void UTriggerComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	UnlockComponent = GetUnlockComponent(Door);
+	GetUnlockComponent();
 }
 
 // Called every frame
 void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	ControlDoor(GetAcceptableKey());
+	ControlDoor();
 }
 
 AActor* UTriggerComponent::GetAcceptableKey() const 
@@ -43,32 +42,36 @@ AActor* UTriggerComponent::GetAcceptableKey() const
 	return nullptr;
 }
 
-UUnlockComponent* UTriggerComponent::GetUnlockComponent(AActor* DoorActor) const
-{	
-	if (UnlockComponent)
-	{
-		return UnlockComponent;
-	}
-
-	if (DoorActor)
-	{
-		return DoorActor->FindComponentByClass<UUnlockComponent>();
-	}
-
-	return UnlockComponent;
+void UTriggerComponent::GetInteraction()
+{
+	SetLockState(true);
 }
 
-void UTriggerComponent::ControlDoor(AActor* Key)
+void UTriggerComponent::GetUnlockComponent()
 {
+	if (Door)
+	{
+		UnlockComponent = Door->FindComponentByClass<UUnlockComponent>();
+		
+		if (!UnlockComponent)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("No Unlock Component"));
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No Door"));
+	}
+}
+
+void UTriggerComponent::ControlDoor()
+{
+	AActor* Key = GetAcceptableKey();
+
 	if (Key)
 	{
 		SetLockState(true);
 	}
-}
-
-void UTriggerComponent::GetInteraction()
-{
-	SetLockState(true);
 }
 
 void UTriggerComponent::SetLockState(bool State)
