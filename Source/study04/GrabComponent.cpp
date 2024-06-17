@@ -1,12 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Grabber.h"
+#include "GrabComponent.h"
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
+#include "Components/InputComponent.h"
 
 // Sets default values for this component's properties
-UGrabber::UGrabber()
+UGrabComponent::UGrabComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -17,7 +18,7 @@ UGrabber::UGrabber()
 
 
 // Called when the game starts
-void UGrabber::BeginPlay()
+void UGrabComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -25,7 +26,7 @@ void UGrabber::BeginPlay()
 
 
 // Called every frame
-void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UGrabComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
@@ -41,25 +42,20 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 		PhysicsHandle->SetTargetLocationAndRotation(TargetLocation, GetComponentRotation());
 	}
 
-	/*
-	float Damage;
-	if (HasDamage(Damage)) 
-	{
-		PrintDamage(Damage);
-	}
-	*/
-	/*
-	FRotator MyRotation = GetOwner()->GetActorRotation();
-	FString DebugString = MyRotation.ToCompactString();
+	//void UGrabComponent::SetupInputComponent()
+	//{
+	//	Super::SetupInputComponent();
 
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *DebugString);
+	//	// 마우스 클릭 이벤트 바인딩
+	//	InputComponent->BindAction("LeftMouseClick", IE_Pressed, this, &UGrabComponent::Grab);
+	//	InputComponent->BindAction("LeftMouseClick", IE_Released, this, &UGrabComponent::Release);
 
-	float Time = GetWorld()->TimeSeconds;
-	UE_LOG(LogTemp, Display, TEXT("%f"), Time);
-	*/
+	//	// E 키 입력 바인딩 (필요에 따라)
+	//	InputComponent->BindAction("Interact", IE_Pressed, this, &UGrabComponent::Interact);
+	//}
 }
 
-void UGrabber::Release()
+void UGrabComponent::Release()
 {
 	UPhysicsHandleComponent* PhysicsHandle = GetPhysicsHandle();
 	if (PhysicsHandle == nullptr)
@@ -76,7 +72,7 @@ void UGrabber::Release()
 	}	
 }
 
-void UGrabber::Grab() 
+void UGrabComponent::Grab() 
 {
 	UPhysicsHandleComponent* PhysicsHandle = GetPhysicsHandle();
 	if (PhysicsHandle == nullptr)
@@ -112,17 +108,17 @@ void UGrabber::Grab()
 	}
 }
 
-UPhysicsHandleComponent* UGrabber::GetPhysicsHandle() const 
+UPhysicsHandleComponent* UGrabComponent::GetPhysicsHandle() const 
 {
 	UPhysicsHandleComponent* Result = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
 	if (Result == nullptr) 
 	{
-		UE_LOG(LogTemp, Error, TEXT(" ""Grabber"" NEED UPhysicsHandleComponent"));
+		UE_LOG(LogTemp, Error, TEXT(" ""GrabComponent"" NEED UPhysicsHandleComponent"));
 	}
 	return Result;
 }
 
-bool UGrabber::GetGrabbableInReach(FHitResult& OutHitResult) const
+bool UGrabComponent::GetGrabbableInReach(FHitResult& OutHitResult) const
 {
 	FVector Start = GetComponentLocation();
 	FVector End = Start + GetForwardVector() * MaxGrabDistance;

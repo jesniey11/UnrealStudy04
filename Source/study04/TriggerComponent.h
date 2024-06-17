@@ -31,8 +31,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	AActor* GetAcceptableKey() const;
 
-	UFUNCTION(BlueprintCallable)
-	void GetInteraction();
+	/*UFUNCTION(BlueprintCallable)
+	void GetInteraction();*/
+
+	virtual void ControlDoor();
+	void SetLockState(bool State);
 
 private:
 	/* Variables */
@@ -49,7 +52,4 @@ private:
 
 	/* Function */
 	void GetUnlockComponent();
-	//UUnlockComponent* GetUnlockComponent(AActor* DoorActor) const;
-	void ControlDoor();
-	void SetLockState(bool State);
 };

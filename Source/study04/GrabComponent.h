@@ -5,18 +5,19 @@
 #include "CoreMinimal.h"
 #include "Components/SceneComponent.h"
 #include "PhysicsEngine/PhysicsHandleComponent.h"
+#include "GameFramework/InputSettings.h" 
 
-#include "Grabber.generated.h"
+#include "GrabComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class STUDY04_API UGrabber : public USceneComponent
+class STUDY04_API UGrabComponent : public USceneComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UGrabber();
+	UGrabComponent();
 
 protected:
 	// Called when the game starts

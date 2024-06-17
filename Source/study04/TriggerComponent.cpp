@@ -42,10 +42,10 @@ AActor* UTriggerComponent::GetAcceptableKey() const
 	return nullptr;
 }
 
-void UTriggerComponent::GetInteraction()
-{
-	SetLockState(true);
-}
+//void UTriggerComponent::GetInteraction()
+//{
+//	SetLockState(true);
+//}
 
 void UTriggerComponent::GetUnlockComponent()
 {
@@ -67,7 +67,7 @@ void UTriggerComponent::GetUnlockComponent()
 void UTriggerComponent::ControlDoor()
 {
 	AActor* Key = GetAcceptableKey();
-
+	
 	if (Key)
 	{
 		SetLockState(true);
