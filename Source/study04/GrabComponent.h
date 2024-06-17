@@ -28,10 +28,13 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable)
+	void Grab();
+
+	UFUNCTION(BlueprintCallable)
 	void Release();
 
 	UFUNCTION(BlueprintCallable)
-	void Grab();
+	void Interact();
 
 private:
 	UPROPERTY(EditAnywhere)

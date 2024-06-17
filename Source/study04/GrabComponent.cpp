@@ -41,36 +41,8 @@ void UGrabComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 		FVector TargetLocation = GetComponentLocation() + GetForwardVector() * HoldDistance;
 		PhysicsHandle->SetTargetLocationAndRotation(TargetLocation, GetComponentRotation());
 	}
-
-	//void UGrabComponent::SetupInputComponent()
-	//{
-	//	Super::SetupInputComponent();
-
-	//	// 마우스 클릭 이벤트 바인딩
-	//	InputComponent->BindAction("LeftMouseClick", IE_Pressed, this, &UGrabComponent::Grab);
-	//	InputComponent->BindAction("LeftMouseClick", IE_Released, this, &UGrabComponent::Release);
-
-	//	// E 키 입력 바인딩 (필요에 따라)
-	//	InputComponent->BindAction("Interact", IE_Pressed, this, &UGrabComponent::Interact);
-	//}
 }
 
-void UGrabComponent::Release()
-{
-	UPhysicsHandleComponent* PhysicsHandle = GetPhysicsHandle();
-	if (PhysicsHandle == nullptr)
-	{
-		return;
-	}
-
-	if (PhysicsHandle->GetGrabbedComponent() != nullptr) 
-	{
-		AActor* GrabbedActor = PhysicsHandle->GetGrabbedComponent()->GetOwner();
-		GrabbedActor->Tags.Remove("Grabbed");
-		
-		PhysicsHandle->ReleaseComponent();
-	}	
-}
 
 void UGrabComponent::Grab() 
 {
@@ -106,6 +78,28 @@ void UGrabComponent::Grab()
 		//DrawDebugSphere(GetWorld(), HitResult.Location, 10, 10, FColor::Red, false, 5);
 		*/
 	}
+}
+
+void UGrabComponent::Release()
+{
+	UPhysicsHandleComponent* PhysicsHandle = GetPhysicsHandle();
+	if (PhysicsHandle == nullptr)
+	{
+		return;
+	}
+
+	if (PhysicsHandle->GetGrabbedComponent() != nullptr)
+	{
+		AActor* GrabbedActor = PhysicsHandle->GetGrabbedComponent()->GetOwner();
+		GrabbedActor->Tags.Remove("Grabbed");
+
+		PhysicsHandle->ReleaseComponent();
+	}
+}
+
+void UGrabComponent::Interact()
+{
+	
 }
 
 UPhysicsHandleComponent* UGrabComponent::GetPhysicsHandle() const 

@@ -22,6 +22,5 @@ protected:
 	UInputMappingContext* InputMappingContext;
 
 protected:
-
 	virtual void BeginPlay() override;
 };

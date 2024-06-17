@@ -19,5 +19,6 @@ protected:
 
 public:
     // Override ControlDoor function
+    UFUNCTION(BlueprintCallable)
     virtual void ControlDoor() override;
 };
