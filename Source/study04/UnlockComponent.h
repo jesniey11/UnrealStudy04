@@ -30,6 +30,7 @@ public:
 	bool IsToggleable = false;
 
 	/* Function */
+	UFUNCTION(BlueprintCallable)
 	bool GetIsUnlock() const;
 
 	UFUNCTION(BlueprintCallable)

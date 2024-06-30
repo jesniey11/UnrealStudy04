@@ -34,7 +34,11 @@ public:
 	/*UFUNCTION(BlueprintCallable)
 	void GetInteraction();*/
 
-	virtual void ControlDoor();
+	void ControlDoor();
+
+	UFUNCTION(BlueprintCallable)
+	void ControlButton();
+
 	void SetLockState(bool State);
 
 private:

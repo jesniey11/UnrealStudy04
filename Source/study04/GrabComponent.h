@@ -33,9 +33,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Release();
 
-	UFUNCTION(BlueprintCallable)
-	void Interact();
-
 private:
 	UPROPERTY(EditAnywhere)
 	float MaxGrabDistance = 400;

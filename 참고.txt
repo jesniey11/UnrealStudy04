@@ -11,3 +11,5 @@
 
 
 ////////////////////////////
+
+Door가 Lock을 배열로 받아서 모든 Lock이 Unlock이 되면 IsUnlock = true

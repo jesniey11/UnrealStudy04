@@ -97,11 +97,6 @@ void UGrabComponent::Release()
 	}
 }
 
-void UGrabComponent::Interact()
-{
-	
-}
-
 UPhysicsHandleComponent* UGrabComponent::GetPhysicsHandle() const 
 {
 	UPhysicsHandleComponent* Result = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
