@@ -4,18 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-//#include "LockComponent.h"
-#include "DoorComponent.generated.h"
+#include "DoorComponent.h"
+#include "TestMoveComponent.generated.h"
 
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class STUDY04_API UDoorComponent : public UActorComponent
+class STUDY04_API UTestMoveComponent : public UDoorComponent
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this component's properties
-	UDoorComponent();
+	UTestMoveComponent();
 
 protected:
 	// Called when the game starts
@@ -24,26 +24,8 @@ protected:
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-protected:
-	/* Variables */
-
-	/* Function */
-	virtual void OpenDoor();
+	virtual void OpenDoor() override;
 
 private:
-	/* Variables */
-	UPROPERTY(EditAnywhere)
-	FTransform Offset;
-	UPROPERTY(EditAnywhere)
-	float Time = 4;
-	FTransform OriginalTransform;
 
-	UPROPERTY(EditAnywhere)
-	TArray<AActor*> Locks; // Detail 패널에서 자물쇠 연결
-	//TArray <ULockComponent*> LockComponents;
-
-	/* Function */
-	void GetLockComponent();
-	void GetOriginalTransform();
 };
