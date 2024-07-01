@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "DoorComponent.h"
@@ -18,8 +18,9 @@ UDoorComponent::UDoorComponent()
 void UDoorComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	GetLockComponent();
 
+	GetLockComponent();
+	GetOriginalTransform();
 }
 
 
@@ -28,7 +29,7 @@ void UDoorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	OpenDoor();
 }
 
 void UDoorComponent::GetLockComponent()
@@ -39,17 +40,27 @@ void UDoorComponent::GetLockComponent()
 	{
 		ULockComponent* LockComponent = Lock->FindComponentByClass<ULockComponent>();
 
-		if (!LockComponent) 
+		if (!LockComponent)
 		{
 			FString Name = Lock->GetActorNameOrLabel();
-			UE_LOG(LogTemp, Warning, TEXT("NO Lock Component - %s"), *Name);
+			UE_LOG(LogTemp, Warning, TEXT("%s: NO Lock Component"), *Name);
 		}
-		
+
 		else
 		{
 			LockComponents.Add(LockComponent);
-			UE_LOG(LogTemp, Warning, TEXT("LockComponents SIZE : %d "), LockComponents.Num());
+			UE_LOG(LogTemp, Warning, TEXT("LockComponents SIZE - %d "), LockComponents.Num());
 		}
 	}
 }
 
+void UDoorComponent::GetOriginalTransform()
+{
+	OriginalTransform = GetOwner()->GetActorTransform();
+}
+
+void UDoorComponent::OpenDoor()
+{
+	FString Name = GetOwner()->GetActorNameOrLabel();
+	UE_LOG(LogTemp, Display, TEXT("%s: NO Move or Rotate"), *Name);
+}
