@@ -18,9 +18,8 @@ UDoorComponent::UDoorComponent()
 void UDoorComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
 	GetLockComponent();
-	GetOriginalTransform();
+
 }
 
 
@@ -28,8 +27,8 @@ void UDoorComponent::BeginPlay()
 void UDoorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	
-	OpenDoor();
+
+	// ...
 }
 
 void UDoorComponent::GetLockComponent()
@@ -43,25 +42,14 @@ void UDoorComponent::GetLockComponent()
 		if (!LockComponent) 
 		{
 			FString Name = Lock->GetActorNameOrLabel();
-			UE_LOG(LogTemp, Warning, TEXT("%s: NO Lock Component"), *Name);
+			UE_LOG(LogTemp, Warning, TEXT("NO Lock Component - %s"), *Name);
 		}
 		
 		else
 		{
 			LockComponents.Add(LockComponent);
-			UE_LOG(LogTemp, Warning, TEXT("LockComponents SIZE - %d "), LockComponents.Num());
+			UE_LOG(LogTemp, Warning, TEXT("LockComponents SIZE : %d "), LockComponents.Num());
 		}
 	}
-}
-
-void UDoorComponent::GetOriginalTransform()
-{
-	OriginalTransform = GetOwner()->GetActorTransform();
-}
-
-void UDoorComponent::OpenDoor()
-{
-	FString Name = GetOwner()->GetActorNameOrLabel();
-	UE_LOG(LogTemp, Display, TEXT("%s: NO Move or Rotate"), *Name);
 }
 

@@ -37,6 +37,4 @@ private:
 
 	/* Function */
 	void GetLockComponent();
-	void GetOriginalTransform();
-	void OpenDoor();
 };
