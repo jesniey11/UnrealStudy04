@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-//#include "LockComponent.h"
+#include "LockComponent.h"
 #include "DoorComponent.generated.h"
 
 
@@ -41,7 +41,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TArray<AActor*> Locks; // Detail 패널에서 자물쇠 연결
-	//TArray <ULockComponent*> LockComponents;
+	TArray <ULockComponent*> LockComponents;
 
 	/* Function */
 	void GetLockComponent();

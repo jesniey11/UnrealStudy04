@@ -34,7 +34,7 @@ void UDoorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 void UDoorComponent::GetLockComponent()
 {
-	/*UE_LOG(LogTemp, Display, TEXT("진입"));
+	UE_LOG(LogTemp, Display, TEXT("진입"));
 
 	for (AActor* Lock : Locks)
 	{
@@ -51,7 +51,7 @@ void UDoorComponent::GetLockComponent()
 			LockComponents.Add(LockComponent);
 			UE_LOG(LogTemp, Warning, TEXT("LockComponents SIZE - %d "), LockComponents.Num());
 		}
-	}*/
+	}
 }
 
 void UDoorComponent::GetOriginalTransform()
