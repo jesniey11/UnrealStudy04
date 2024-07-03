@@ -6,7 +6,7 @@
 * 코드 리팩토링
 
 1.	Unlock+Trigger => LockComponent [완료]
-2.	DoorComponent를 만들고, Move와 Rotate가 상속받게 함 [상속까지는 OK, 미작동]
+2.	DoorComponent를 만들고, Move와 Rotate가 상속받게 함 [완료]
 3.	Door에서 Lock을 받아오게 하고, 배열로 받게 함 [완료]
 4.	Button을 어떻게 할지 고민중
 

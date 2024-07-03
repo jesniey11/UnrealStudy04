@@ -4,12 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "UnlockComponent.h"
+#include "DoorComponent.h"
 #include "MoveComponent.generated.h"
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class STUDY04_API UMoveComponent : public UActorComponent
+class STUDY04_API UMoveComponent : public UDoorComponent
 {
 	GENERATED_BODY()
 
@@ -25,17 +24,15 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+public:
+	/* Functions */
+	virtual void OpenDoor() override;
+
 private:
 	/* Variables */
-	UPROPERTY(EditAnywhere)
-	FVector MoveOffset;
+	FVector OriginalVector;
+	FVector VectorOffset;
 
-	UPROPERTY(EditAnywhere)
-	float MoveTime = 4;
-
-	FVector OriginalLocation;
-	UUnlockComponent* UnlockComponent;
-
-	/* Function */
-	UUnlockComponent* GetUnlockComponent() const;
+	/* Functions */
+	void VectorTranslator();
 };

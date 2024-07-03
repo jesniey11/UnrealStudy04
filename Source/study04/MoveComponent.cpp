@@ -18,34 +18,30 @@ UMoveComponent::UMoveComponent()
 void UMoveComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	OriginalLocation = GetOwner()->GetActorLocation();
-	UnlockComponent = GetUnlockComponent();
+
+	VectorTranslator();
 }
+
 
 // Called every frame
 void UMoveComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	if (UnlockComponent->GetIsUnlock())
-	{
-		FVector CurrentLocation = GetOwner()->GetActorLocation();
-		FVector TargetLocation = OriginalLocation + MoveOffset;
-
-		float MoveSpeed = FVector::Distance(OriginalLocation, TargetLocation) / MoveTime;
-
-		FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, DeltaTime, MoveSpeed);
-		GetOwner()->SetActorLocation(NewLocation);
-	}
 }
 
-UUnlockComponent* UMoveComponent::GetUnlockComponent() const
+void UMoveComponent::VectorTranslator()
 {
-	if (!UnlockComponent)
-	{
-		return GetOwner()->FindComponentByClass<UUnlockComponent>();
-	}
+	OriginalVector = OriginalTransform.GetLocation();
+	VectorOffset = Offset.GetLocation();
+}
 
-	return UnlockComponent;
+void UMoveComponent::OpenDoor()
+{
+	FVector CurrentLocation = GetOwner()->GetActorLocation();
+	FVector TargetLocation = OriginalVector + VectorOffset;
+
+	float MoveSpeed = FVector::Distance(OriginalVector, TargetLocation) / Time;
+
+	FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, TickTime, MoveSpeed);
+	GetOwner()->SetActorLocation(NewLocation);
 }
