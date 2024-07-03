@@ -24,12 +24,51 @@ void ULockComponent::BeginPlay()
 void ULockComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	Check();
+	ControlDoor();
 }
 
-void ULockComponent::Check()
+AActor* ULockComponent::GetAcceptableKey() const
 {
-	UE_LOG(LogTemp, Display, TEXT("lock connect check"));
+	TArray<AActor*> OverlappingActors;
+	GetOverlappingActors(OverlappingActors);
+
+	for (AActor* Actor : OverlappingActors)
+	{
+		bool HasAcceptableTag = Actor->ActorHasTag(AcceptableActorTag);
+		bool IsGrabbed = Actor->ActorHasTag("Grabbed");
+
+		if (HasAcceptableTag && !IsGrabbed)
+		{
+			return Actor;
+		}
+	}
+	return nullptr;
 }
 
+void ULockComponent::ControlDoor()
+{
+	AActor* Key = GetAcceptableKey();
+
+	if (Key)
+	{
+		FString Name = Key->GetActorNameOrLabel();
+		UE_LOG(LogTemp, Display, TEXT("Get KEY %s"), *Name);
+		
+		SetIsUnlock(true);
+	}
+
+	/*else if (IsToggleable)
+	{
+		SetIsUnlock(false);
+	}*/
+}
+
+bool ULockComponent::GetIsUnlock() const
+{
+	return IsUnlock;
+}
+
+void ULockComponent::SetIsUnlock(bool NewIsUnlock)
+{
+	IsUnlock = NewIsUnlock;
+}

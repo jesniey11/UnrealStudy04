@@ -27,6 +27,12 @@ public:
 
 protected:
 	/* Variables */
+	UPROPERTY(EditAnywhere)
+	FTransform Offset;
+	UPROPERTY(EditAnywhere)
+	float Time = 4;
+	FTransform OriginalTransform;
+	float TickTime;
 
 	/* Function */
 	virtual void OpenDoor();
@@ -34,16 +40,11 @@ protected:
 private:
 	/* Variables */
 	UPROPERTY(EditAnywhere)
-	FTransform Offset;
-	UPROPERTY(EditAnywhere)
-	float Time = 4;
-	FTransform OriginalTransform;
-
-	UPROPERTY(EditAnywhere)
 	TArray<AActor*> Locks; // Detail 패널에서 자물쇠 연결
 	TArray <ULockComponent*> LockComponents;
 
-	/* Function */
+	/* Functions */
 	void GetLockComponent();
 	void GetOriginalTransform();
+	void CheckAllLocks();
 };

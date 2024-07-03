@@ -24,8 +24,16 @@ protected:
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+public:
+	/* Functions */
 	virtual void OpenDoor() override;
 
 private:
+	/* Variables */
+	FVector OriginalVector;
+	FVector VectorOffset;
 
+	/* Functions */
+	void VectorTranslator();
 };

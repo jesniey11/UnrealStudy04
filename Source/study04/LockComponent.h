@@ -27,6 +27,20 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
+	/* Variables */
+	UPROPERTY(EditAnywhere)
+	FName AcceptableActorTag; //자물쇠와 일치하는 KEY
 
-	void Check();
+	UPROPERTY(EditAnywhere)
+	bool IsToggleable = false; //true면 다시 잠길 수 있음
+	UPROPERTY(VisibleAnywhere)
+	bool IsUnlock = false;
+
+	AActor* GetAcceptableKey() const;
+	void ControlDoor();
+
+public:
+	/* Functions */
+	bool GetIsUnlock() const;
+	void SetIsUnlock(bool IsUnlock);
 };

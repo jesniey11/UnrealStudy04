@@ -28,14 +28,13 @@ void UDoorComponent::BeginPlay()
 void UDoorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	TickTime = DeltaTime;
 
-	OpenDoor();
+	CheckAllLocks();
 }
 
 void UDoorComponent::GetLockComponent()
 {
-	UE_LOG(LogTemp, Display, TEXT("진입"));
-
 	for (AActor* Lock : Locks)
 	{
 		ULockComponent* LockComponent = Lock->FindComponentByClass<ULockComponent>();
@@ -59,8 +58,19 @@ void UDoorComponent::GetOriginalTransform()
 	OriginalTransform = GetOwner()->GetActorTransform();
 }
 
+void UDoorComponent::CheckAllLocks()
+{
+	for (ULockComponent* LockComponent : LockComponents)
+	{
+		if (!LockComponent->GetIsUnlock()) return;
+	}
+
+	OpenDoor();
+}
+
 void UDoorComponent::OpenDoor()
 {
 	FString Name = GetOwner()->GetActorNameOrLabel();
-	UE_LOG(LogTemp, Display, TEXT("%s: NO Move or Rotate"), *Name);
+	UE_LOG(LogTemp, Display, TEXT("%s: Unlocked, NO Move or Rotate"), *Name);
+
 }

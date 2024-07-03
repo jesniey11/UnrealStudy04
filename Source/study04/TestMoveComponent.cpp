@@ -19,8 +19,7 @@ void UTestMoveComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-
+	VectorTranslator();
 }
 
 
@@ -32,19 +31,19 @@ void UTestMoveComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	// ...
 }
 
+void UTestMoveComponent::VectorTranslator()
+{
+	OriginalVector = OriginalTransform.GetLocation();
+	VectorOffset = Offset.GetLocation();
+}
+
 void UTestMoveComponent::OpenDoor()
 {
-	FString Name = GetOwner()->GetActorNameOrLabel();
-	UE_LOG(LogTemp, Display, TEXT("%s: Move"), *Name);
+	FVector CurrentLocation = GetOwner()->GetActorLocation();
+	FVector TargetLocation = OriginalVector + VectorOffset;
 
-	/*if (UnlockComponent->GetIsUnlock())
-	{
-		FVector CurrentLocation = GetOwner()->GetActorLocation();
-		FVector TargetLocation = OriginalLocation + MoveOffset;
+	float MoveSpeed = FVector::Distance(OriginalVector, TargetLocation) / Time;
 
-		float MoveSpeed = FVector::Distance(OriginalLocation, TargetLocation) / MoveTime;
-
-		FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, DeltaTime, MoveSpeed);
-		GetOwner()->SetActorLocation(NewLocation);
-	}*/
+	FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, TickTime, MoveSpeed);
+	GetOwner()->SetActorLocation(NewLocation);
 }
