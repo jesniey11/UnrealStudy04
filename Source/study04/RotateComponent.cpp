@@ -20,10 +20,7 @@ void URotateComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	AActor* Parent = GetOwner()->GetParentActor();
-	OriginalRotation = GetOwner()->GetActorRotation();
-
-	UnlockComponent = GetUnlockComponent(Parent);
+	RotatorTranslator();
 }
 
 
@@ -31,28 +28,21 @@ void URotateComponent::BeginPlay()
 void URotateComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-
-	if (UnlockComponent->GetIsUnlock())
-	{
-		FRotator CurrentRotation = GetOwner()->GetActorRotation();
-		FRotator TargetRotation = OriginalRotation + RotateOffset;
-
-		float RotateSpeed = OriginalRotation.GetManhattanDistance(TargetRotation) / RotateTime;
-
-		FRotator NewRotation = FMath::RInterpConstantTo(CurrentRotation, TargetRotation, DeltaTime, RotateSpeed);
-		GetOwner()->SetActorRotation(NewRotation);
-	}
 }
 
-UUnlockComponent* URotateComponent::GetUnlockComponent(AActor* ParentActor) const
+void URotateComponent::OpenDoor()
 {
-	if (UnlockComponent) { return UnlockComponent; }
+	FRotator CurrentRotation = GetOwner()->GetActorRotation();
+	FRotator TargetRotation = OriginalRotation + RotateOffset;
 
-	if (ParentActor)
-	{
-		return ParentActor->FindComponentByClass<UUnlockComponent>();
-	}
+	float RotateSpeed = OriginalRotation.GetManhattanDistance(TargetRotation) / Time;
 
-	return nullptr;
+	FRotator NewRotation = FMath::RInterpConstantTo(CurrentRotation, TargetRotation, TickTime, RotateSpeed);
+	GetOwner()->SetActorRotation(NewRotation);
+}
+
+void URotateComponent::RotatorTranslator()
+{
+	OriginalRotation = OriginalTransform.GetRotation().Rotator();
+	RotateOffset = Offset.GetRotation().Rotator();
 }

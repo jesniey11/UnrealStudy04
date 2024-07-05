@@ -35,20 +35,29 @@ void UDoorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 void UDoorComponent::GetLockComponent()
 {
+	FString DoorName = GetOwner()->GetActorNameOrLabel();
+
 	for (AActor* Lock : Locks)
 	{
+		if (!Lock) 
+		{
+			UE_LOG(LogTemp, Error, TEXT("%s: No Lock"), *DoorName);
+			
+			continue;
+		}
+		
+		FString LockName = Lock->GetActorNameOrLabel();
 		ULockComponent* LockComponent = Lock->FindComponentByClass<ULockComponent>();
 
 		if (!LockComponent)
 		{
-			FString Name = Lock->GetActorNameOrLabel();
-			UE_LOG(LogTemp, Warning, TEXT("%s: NO Lock Component"), *Name);
+			UE_LOG(LogTemp, Warning, TEXT("%s: NO Lock Component"), *LockName);
 		}
 
 		else
 		{
 			LockComponents.Add(LockComponent);
-			UE_LOG(LogTemp, Warning, TEXT("LockComponents SIZE - %d "), LockComponents.Num());
+			UE_LOG(LogTemp, Warning, TEXT("%s: LockComponents SIZE - %d "), *DoorName, LockComponents.Num());
 		}
 	}
 }
@@ -60,6 +69,8 @@ void UDoorComponent::GetOriginalTransform()
 
 void UDoorComponent::CheckAllLocks()
 {
+	if (LockComponents.Num() == 0) return;
+
 	for (ULockComponent* LockComponent : LockComponents)
 	{
 		if (!LockComponent->GetIsUnlock()) return;

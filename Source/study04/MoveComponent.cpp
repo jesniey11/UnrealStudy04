@@ -29,12 +29,6 @@ void UMoveComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-void UMoveComponent::VectorTranslator()
-{
-	OriginalVector = OriginalTransform.GetLocation();
-	VectorOffset = Offset.GetLocation();
-}
-
 void UMoveComponent::OpenDoor()
 {
 	FVector CurrentLocation = GetOwner()->GetActorLocation();
@@ -44,4 +38,10 @@ void UMoveComponent::OpenDoor()
 
 	FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, TickTime, MoveSpeed);
 	GetOwner()->SetActorLocation(NewLocation);
+}
+
+void UMoveComponent::VectorTranslator()
+{
+	OriginalVector = OriginalTransform.GetLocation();
+	VectorOffset = Offset.GetLocation();
 }

@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "UnlockComponent.h"
+#include "DoorComponent.h"
 #include "RotateComponent.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class STUDY04_API URotateComponent : public UActorComponent
+class STUDY04_API URotateComponent : public UDoorComponent
 {
 	GENERATED_BODY()
 
@@ -24,20 +24,15 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	//void SetShouldRotate(bool ShouldRotate);
+public:
+	/* Functions */
+	virtual void OpenDoor() override;
 
 private:
 	/* Variables */
-	UPROPERTY(EditAnywhere)
+	FRotator OriginalRotation;
 	FRotator RotateOffset;
 
-	UPROPERTY(EditAnywhere)
-	float RotateTime = 4;
-
-	FRotator OriginalRotation;
-	UUnlockComponent* UnlockComponent;
-
-	/* Function */
-	UUnlockComponent* GetUnlockComponent(AActor* ParentActor) const;
-
+	/* Functions */
+	void RotatorTranslator();
 };
