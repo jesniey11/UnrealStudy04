@@ -33,13 +33,20 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	bool IsToggleable = false; //true면 다시 잠길 수 있음
-	UPROPERTY(VisibleAnywhere)
-	bool IsUnlock = false;
 
+	UPROPERTY(EditAnywhere)
+	bool CanDestroyKey = false;
+
+	/* Functions */
 	AActor* GetAcceptableKey() const;
+	void DestroyKey(AActor* Key);
 	void ControlDoor();
 
 public:
+	/* Variables */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool IsUnlock = false;
+
 	/* Functions */
 	bool GetIsUnlock() const;
 	void SetIsUnlock(bool IsUnlock);

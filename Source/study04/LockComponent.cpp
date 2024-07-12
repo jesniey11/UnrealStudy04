@@ -45,6 +45,10 @@ AActor* ULockComponent::GetAcceptableKey() const
 	return nullptr;
 }
 
+void ULockComponent::DestroyKey(AActor* Key)
+{
+}
+
 void ULockComponent::ControlDoor()
 {
 	AActor* Key = GetAcceptableKey();
@@ -55,6 +59,11 @@ void ULockComponent::ControlDoor()
 		UE_LOG(LogTemp, Display, TEXT("Get KEY %s"), *Name);
 		
 		SetIsUnlock(true);
+
+		if (CanDestroyKey) 
+		{
+			Key->Destroy();
+		}
 	}
 
 	/*else if (IsToggleable)
