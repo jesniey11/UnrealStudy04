@@ -13,6 +13,9 @@
 
 3.	Door에서 Lock을 받아오게 하고, 배열로 받게 함 [완료]
 4.	Button을 어떻게 할지 고민중
+
+* 버튼과 오버랩 -> 
+
 5.	블루프린트 연출 -> c++ 코드로 변경
 
 
@@ -20,4 +23,4 @@
 Door가 Lock을 배열로 받아서 모든 Lock이 Unlock이 되면 IsUnlock = true [완료]
 
 * 발견된 문제
-Firepit과 Button의 Trigger 크기가 연동되는 현상
+Firepit과 Button의 Trigger 크기가 연동되는 현상 [해결]
