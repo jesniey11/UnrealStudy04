@@ -10,4 +10,13 @@
 
 2.	Lock의 IsToggleable = true 일때 문 닫힘 -> 다시 열림 구현
 3.	Button 구현
+
 4.	Door2 BP 연출 최소화 -> 최대한 코드로 이식
+	
+4-1.
+Key2 액터 컴포넌트 생성(FireComponent)
+key에 Fire 태그가 없음 -> overlap 액터 중 Fire 태그 검색 
+-> 있으면 Fire 태그 추가, bool IsFire = true
+-> BP에서 IsFire = true 일때 KEY2 태그 추가(틱마다 추가하지않게 조심) -> Pointlight Visible 설정
+
+4-2. IsUnlock true 일때 Fire ON
