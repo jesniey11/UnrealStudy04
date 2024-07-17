@@ -73,7 +73,11 @@ void UDoorComponent::CheckAllLocks()
 
 	for (ULockComponent* LockComponent : LockComponents)
 	{
-		if (!LockComponent->GetIsUnlock()) return;
+		if (!LockComponent->GetIsUnlock()) 
+		{
+			CloseDoor(); 
+			return;
+		}
 	}
 
 	OpenDoor();
@@ -82,6 +86,11 @@ void UDoorComponent::CheckAllLocks()
 void UDoorComponent::OpenDoor()
 {
 	FString Name = GetOwner()->GetActorNameOrLabel();
-	UE_LOG(LogTemp, Display, TEXT("%s: Unlocked, NO Move or Rotate"), *Name);
+	UE_LOG(LogTemp, Display, TEXT("%s: OPEN, NO Move or Rotate"), *Name);
+}
 
+void UDoorComponent::CloseDoor()
+{
+	FString Name = GetOwner()->GetActorNameOrLabel();
+	UE_LOG(LogTemp, Display, TEXT("%s: CLOSE, NO Move or Rotate"), *Name);
 }

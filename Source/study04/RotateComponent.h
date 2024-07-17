@@ -27,6 +27,7 @@ public:
 public:
 	/* Functions */
 	virtual void OpenDoor() override;
+	virtual void CloseDoor() override;
 
 private:
 	/* Variables */
@@ -34,5 +35,6 @@ private:
 	FRotator RotateOffset;
 
 	/* Functions */
+	FRotator SetTargetRotation();
 	void RotatorTranslator();
 };

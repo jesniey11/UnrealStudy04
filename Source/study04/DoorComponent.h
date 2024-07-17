@@ -36,6 +36,7 @@ protected:
 
 	/* Function */
 	virtual void OpenDoor();
+	virtual void CloseDoor();
 
 private:
 	/* Variables */

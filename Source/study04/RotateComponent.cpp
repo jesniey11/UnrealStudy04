@@ -41,6 +41,17 @@ void URotateComponent::OpenDoor()
 	GetOwner()->SetActorRotation(NewRotation);
 }
 
+void URotateComponent::CloseDoor()
+{
+	FRotator CurrentRotation = GetOwner()->GetActorRotation();
+	FRotator TargetRotation = OriginalRotation;
+
+	float RotateSpeed = TargetRotation.GetManhattanDistance(CurrentRotation) / Time * 1.5;
+
+	FRotator NewRotation = FMath::RInterpConstantTo(CurrentRotation, TargetRotation, TickTime, RotateSpeed);
+	GetOwner()->SetActorRotation(NewRotation);
+}
+
 void URotateComponent::RotatorTranslator()
 {
 	OriginalRotation = OriginalTransform.GetRotation().Rotator();

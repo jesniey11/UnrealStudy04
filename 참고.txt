@@ -6,9 +6,17 @@
 * 코드 리팩토링
 
 1.	미사용 코드 정리
-	-> 정리대상 : Trigger/LockActor/Unlock/TestMoveComponent
+	-> 정리대상 : Trigger/LockActor/Unlock/TestMoveComponent [완료]
 
-2.	Lock의 IsToggleable = true 일때 문 닫힘 -> 다시 열림 구현
+2.	Lock의 IsToggleable = true 일때 문 닫힘 -> 다시 열림 구현 [완료]
+
+
+
+
+
+
+
+
 3.	Button 구현
 
 4.	Door2 BP 연출 최소화 -> 최대한 코드로 이식

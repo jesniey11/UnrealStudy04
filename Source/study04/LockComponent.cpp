@@ -63,13 +63,20 @@ void ULockComponent::ControlDoor()
 		UE_LOG(LogTemp, Display, TEXT("Get KEY %s"), *Name);
 		
 		SetIsUnlock(true);
-		DestroyKey(Key);
+
+		if (!IsToggleable)
+		{
+			DestroyKey(Key);
+		}
 	}
 
-	/*else if (IsToggleable)
+	else
 	{
-		SetIsUnlock(false);
-	}*/
+		if (IsToggleable) 
+		{ 
+			SetIsUnlock(false); 
+		}
+	}
 }
 
 bool ULockComponent::GetIsUnlock() const
