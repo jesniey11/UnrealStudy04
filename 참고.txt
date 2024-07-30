@@ -7,19 +7,20 @@
 
 1.	미사용 코드 정리
 	-> 정리대상 : Trigger/LockActor/Unlock/TestMoveComponent [완료]
-
 2.	Lock의 IsToggleable = true 일때 문 닫힘 -> 다시 열림 구현 [완료]
-
-
-
-
-
-
-
 
 3.	Button 구현
 
-4.	Door2 BP 연출 최소화 -> 최대한 코드로 이식
+3-1. GrabComponent 이름 변경 -> PlayerSceneComponent
+3-2. [완료]
+Interact 함수 추가
+HasHit로 액터 감지 / 액터가 Interact 대상 액터인지 확인 -> true면 액터 태그 추가
+
+3-3.
+Lock을 상속받는 Button을 만들어서 OnInteract 태그를 감지할 것
+Has tag = true 일때 Set IsUnlock = true
+
+3-4. IsUnlock = True일때 Button 눌림 표현 => BP 이식
 	
 4-1.
 Key2 액터 컴포넌트 생성(FireComponent)
@@ -28,3 +29,7 @@ key에 Fire 태그가 없음 -> overlap 액터 중 Fire 태그 검색
 -> BP에서 IsFire = true 일때 KEY2 태그 추가(틱마다 추가하지않게 조심) -> Pointlight Visible 설정
 
 4-2. IsUnlock true 일때 Fire ON
+
+[버그?]
+1.	Door2 CloseDoor 디버그로그 처리하기 [해결]
+2.	버그는 아니지만 Key 3_4 로그 계속 뜨는거 처리 고민하기

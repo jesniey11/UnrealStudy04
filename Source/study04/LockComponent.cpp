@@ -53,6 +53,21 @@ void ULockComponent::DestroyKey(AActor* Key)
 	}
 }
 
+bool ULockComponent::GetIsUnlock() const
+{
+	return IsUnlock;
+}
+
+void ULockComponent::SetIsUnlock(bool NewIsUnlock)
+{
+	IsUnlock = NewIsUnlock;
+}
+
+bool ULockComponent::GetIsToggleable() const
+{
+	return IsToggleable;
+}
+
 void ULockComponent::ControlDoor()
 {
 	AActor* Key = GetAcceptableKey();
@@ -61,7 +76,7 @@ void ULockComponent::ControlDoor()
 	{
 		FString Name = Key->GetActorNameOrLabel();
 		UE_LOG(LogTemp, Display, TEXT("Get KEY %s"), *Name);
-		
+
 		SetIsUnlock(true);
 
 		if (!IsToggleable)
@@ -72,19 +87,9 @@ void ULockComponent::ControlDoor()
 
 	else
 	{
-		if (IsToggleable) 
-		{ 
-			SetIsUnlock(false); 
+		if (IsToggleable)
+		{
+			SetIsUnlock(false);
 		}
 	}
-}
-
-bool ULockComponent::GetIsUnlock() const
-{
-	return IsUnlock;
-}
-
-void ULockComponent::SetIsUnlock(bool NewIsUnlock)
-{
-	IsUnlock = NewIsUnlock;
 }

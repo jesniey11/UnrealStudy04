@@ -1,13 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "GrabComponent.h"
+#include "PlayerSceneComponent.h"
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
 #include "Components/InputComponent.h"
 
 // Sets default values for this component's properties
-UGrabComponent::UGrabComponent()
+UPlayerSceneComponent::UPlayerSceneComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -18,7 +18,7 @@ UGrabComponent::UGrabComponent()
 
 
 // Called when the game starts
-void UGrabComponent::BeginPlay()
+void UPlayerSceneComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -26,7 +26,7 @@ void UGrabComponent::BeginPlay()
 
 
 // Called every frame
-void UGrabComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UPlayerSceneComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
@@ -44,7 +44,7 @@ void UGrabComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 }
 
 
-void UGrabComponent::Grab() 
+void UPlayerSceneComponent::Grab()
 {
 	UPhysicsHandleComponent* PhysicsHandle = GetPhysicsHandle();
 	if (PhysicsHandle == nullptr)
@@ -80,7 +80,7 @@ void UGrabComponent::Grab()
 	}
 }
 
-void UGrabComponent::Release()
+void UPlayerSceneComponent::Release()
 {
 	UPhysicsHandleComponent* PhysicsHandle = GetPhysicsHandle();
 	if (PhysicsHandle == nullptr)
@@ -97,7 +97,25 @@ void UGrabComponent::Release()
 	}
 }
 
-UPhysicsHandleComponent* UGrabComponent::GetPhysicsHandle() const 
+void UPlayerSceneComponent::Interact()
+{
+	UE_LOG(LogTemp, Warning, TEXT("E Pressed"));
+
+	FHitResult HitResult;
+	bool HasHit = GetGrabbableInReach(HitResult);
+	
+	if (HasHit)
+	{
+		AActor* HitActor = HitResult.GetActor();
+		
+		if (HitActor->ActorHasTag("Interact") && !HitActor->ActorHasTag("OnInteract"))
+		{
+			HitActor->Tags.Add("OnInteract");
+		}
+	}
+}
+
+UPhysicsHandleComponent* UPlayerSceneComponent::GetPhysicsHandle() const
 {
 	UPhysicsHandleComponent* Result = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
 	if (Result == nullptr) 
@@ -107,12 +125,12 @@ UPhysicsHandleComponent* UGrabComponent::GetPhysicsHandle() const
 	return Result;
 }
 
-bool UGrabComponent::GetGrabbableInReach(FHitResult& OutHitResult) const
+bool UPlayerSceneComponent::GetGrabbableInReach(FHitResult& OutHitResult) const
 {
 	FVector Start = GetComponentLocation();
 	FVector End = Start + GetForwardVector() * MaxGrabDistance;
 
-	DrawDebugLine(GetWorld(), Start, End, FColor::White);
+	//DrawDebugLine(GetWorld(), Start, End, FColor::White);
 
 	FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
 

@@ -75,7 +75,11 @@ void UDoorComponent::CheckAllLocks()
 	{
 		if (!LockComponent->GetIsUnlock()) 
 		{
-			CloseDoor(); 
+			if (LockComponent->GetIsToggleable()) 
+			{
+				CloseDoor();
+			}
+
 			return;
 		}
 	}

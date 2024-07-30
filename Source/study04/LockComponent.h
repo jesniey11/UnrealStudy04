@@ -40,7 +40,6 @@ private:
 	/* Functions */
 	AActor* GetAcceptableKey() const;
 	void DestroyKey(AActor* Key);
-	void ControlDoor();
 
 public:
 	/* Variables */
@@ -50,4 +49,8 @@ public:
 	/* Functions */
 	bool GetIsUnlock() const;
 	void SetIsUnlock(bool IsUnlock);
+
+	bool GetIsToggleable() const;
+
+	virtual void ControlDoor();
 };

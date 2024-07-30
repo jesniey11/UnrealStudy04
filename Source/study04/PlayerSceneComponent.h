@@ -7,17 +7,17 @@
 #include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "GameFramework/InputSettings.h" 
 
-#include "GrabComponent.generated.h"
+#include "PlayerSceneComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class STUDY04_API UGrabComponent : public USceneComponent
+class STUDY04_API UPlayerSceneComponent : public USceneComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UGrabComponent();
+	UPlayerSceneComponent();
 
 protected:
 	// Called when the game starts
@@ -32,6 +32,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Release();
+
+	UFUNCTION(BlueprintCallable)
+	void Interact();
 
 private:
 	UPROPERTY(EditAnywhere)
