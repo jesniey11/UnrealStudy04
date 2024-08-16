@@ -4,18 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "LockComponent.h"
-#include "ButtonComponent.generated.h"
+#include "FireComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class STUDY04_API UButtonComponent : public ULockComponent
+class STUDY04_API UFireComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UButtonComponent();
+	UFireComponent();
 
 protected:
 	// Called when the game starts
@@ -25,21 +24,5 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-public:
-	/* Variables */
-	UPROPERTY(EditAnywhere)
-	FVector ButtonVector;
-	FVector CurrentButtonVector;
-
-	/* Functions */
-	virtual void ControlDoor() override;
-
-private:
-	/* Variables */
-
-	/* Functions */
-	bool CheckOnInteract();
-	bool CheckButtonReleased();
-	void SetButtonVisual();
-
+		
 };

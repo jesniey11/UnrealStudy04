@@ -75,7 +75,7 @@ void ULockComponent::ControlDoor()
 	if (Key)
 	{
 		FString Name = Key->GetActorNameOrLabel();
-		UE_LOG(LogTemp, Display, TEXT("Get KEY %s"), *Name);
+		//UE_LOG(LogTemp, Display, TEXT("Get KEY %s"), *Name);
 
 		SetIsUnlock(true);
 

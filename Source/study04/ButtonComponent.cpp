@@ -19,8 +19,10 @@ void UButtonComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	if (!CheckButtonReleased())
+	{
+		GetOwner()->Tags.Add("Released");
+	}
 }
 
 
@@ -34,14 +36,31 @@ void UButtonComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 void UButtonComponent::ControlDoor()
 {
-	if (CheckOnInteract()) 
+	if (CheckOnInteract() && CheckButtonReleased())
 	{
 		SetIsUnlock(true);
+		SetButtonVisual();
 	}
 }
 
 bool UButtonComponent::CheckOnInteract()
 {
-	return GetOwner()->ActorHasTag("OnInteract");
+	return GetOwner()->ActorHasTag("ON");
+}
+
+bool UButtonComponent::CheckButtonReleased()
+{
+	return GetOwner()->ActorHasTag("Released");
+}
+
+void UButtonComponent::SetButtonVisual()
+{
+	if (CheckButtonReleased())
+	{
+		GetOwner()->Tags.Remove("Released");
+		
+		CurrentButtonVector = GetOwner()->GetActorLocation();
+		GetOwner()->SetActorLocation(CurrentButtonVector + ButtonVector);
+	}
 }
 

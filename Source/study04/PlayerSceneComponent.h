@@ -37,6 +37,7 @@ public:
 	void Interact();
 
 private:
+	/* Variables */
 	UPROPERTY(EditAnywhere)
 	float MaxGrabDistance = 400;
 
@@ -45,7 +46,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float GrabRadius = 100;
+
+	FTimerHandle TimerHandle;
 	
+	/* Functions */
 	UPhysicsHandleComponent* GetPhysicsHandle() const;
 	bool GetGrabbableInReach(FHitResult& OutHitResult) const;
 

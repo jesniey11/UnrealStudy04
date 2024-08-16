@@ -4,6 +4,7 @@
 #include "PlayerSceneComponent.h"
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
+#include "TimerManager.h"
 #include "Components/InputComponent.h"
 
 // Sets default values for this component's properties
@@ -108,9 +109,24 @@ void UPlayerSceneComponent::Interact()
 	{
 		AActor* HitActor = HitResult.GetActor();
 		
-		if (HitActor->ActorHasTag("Interact") && !HitActor->ActorHasTag("OnInteract"))
+		// 대상 액터가 Interact 가능 액터인지 확인
+		if (HitActor->ActorHasTag("Interact"))
 		{
-			HitActor->Tags.Add("OnInteract");
+			HitActor->Tags.Add("ON");
+			
+
+			UE_LOG(LogTemp, Display, TEXT(""));
+
+			GetWorld()->GetTimerManager().SetTimer(
+				TimerHandle, 
+				FTimerDelegate::CreateLambda([this, HitActor]() 
+					{
+						HitActor->Tags.Remove("ON"); 
+					}), 
+				1.0f, 
+				false
+			);
+
 		}
 	}
 }
