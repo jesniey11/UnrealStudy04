@@ -5,24 +5,6 @@
 
 * 코드 리팩토링
 
-1.	미사용 코드 정리
-	-> 정리대상 : Trigger/LockActor/Unlock/TestMoveComponent [완료]
-2.	Lock의 IsToggleable = true 일때 문 닫힘 -> 다시 열림 구현 [완료]
-
-3.	Button 구현
-
-3-1. GrabComponent 이름 변경 -> PlayerSceneComponent
-3-2. [완료]
-Interact 함수 추가
-HasHit로 액터 감지 / 액터가 Interact 대상 액터인지 확인 -> true면 액터 태그 추가
-
-3-3. [완료]
-Lock을 상속받는 Button을 만들어서 OnInteract 태그를 감지할 것
-Has tag = true 일때 Set IsUnlock = true
-
-3-4. IsUnlock = True일때 Button 눌림 표현 => BP 이식 [완료] (틱마다 움직이지않게 조심)
-약간 맘에 안든다... 입력 배워서 고칠것
-	
 4-1.
 Key2 액터 컴포넌트 생성(FireComponent)
 key에 Fire 태그가 없음 -> overlap 액터 중 Fire 태그 검색 
